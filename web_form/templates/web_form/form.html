@@ -1,0 +1,22 @@
+{% extends "main_page.html" %}
+
+{% block content %}
+
+<form method="post" >
+    {% csrf_token %}
+    {{ form.field.label }}
+    {{ form.field }}
+    <br>
+    {{ form.captcha.label }}
+    {{ form.captcha }}
+
+    {% if reset %}
+        <br>
+        <b>Неверное, попробуйте еще раз!</b>
+    {% endif %}
+
+    <br>
+    <input type="submit" value="Отправить сообщение">
+</form>
+
+{% endblock %}
