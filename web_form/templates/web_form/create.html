@@ -1,0 +1,27 @@
+{% extends "main_page.html" %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <h3>{{form.title.label}}</h3>
+    <h5>{{form.title}}</h5>
+    <h3>{{form.user_name.label}}</h3>
+    <h5>{{form.user_name}}</h5>
+    <h3>{{form.text.label}}</h3>
+    {{form.text}}
+    <hr>
+    {{form.captcha}}
+    <br>
+    <input type="submit" value="Отправить сообщение">
+    {% if reset %}
+        <br>
+        <b>Ошибка ввода капчи, вы робот!</b>
+    {% endif %}
+</form>
+<hr>
+<form action = "{% url 'forms:list_forms' %}">
+    <input type="submit" value="На главную">
+</form>
+
+{% endblock %}

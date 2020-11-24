@@ -2,23 +2,15 @@
 
 {% block content %}
 
-<form method="post" >
-    {% csrf_token %}
-    <h3>{{form.userName.label}}</h3>
-    <h5>{{form.userName}}</h5>
-    <h3>{{form.date.label}}</h3>
-    <h5>{{form.date}}</h5>
-    <h3>{{form.text.label}}</h3>
-    {{form.text}}
-    <br>
-    {{form.captcha}}
-     <br>
-    <input type="submit" value="Отправить сообщение">
-
-    {% if reset %}
-        <br>
-        <b>Ошибка ввода капчи, вы робот!</b>
-    {% endif %}
+<h3>{{form.title}}</h3>
+<hr>
+<h5>{{form.user_name}}</h5>
+<h5>{{form.date_send}}</h5>
+<br>
+{{form.text}}
+<hr>
+<form action = "{% url 'forms:list_forms' %}">
+    <input type="submit" value="На главную">
 </form>
 
 {% endblock %}
