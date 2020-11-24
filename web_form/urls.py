@@ -1,7 +1,8 @@
 from django.urls import path
+
 from . import views
 
 urlpatterns = [
-    path('', views.form, name='index'),
+    path('', views.sendMessage, name='index'),
 ]
 

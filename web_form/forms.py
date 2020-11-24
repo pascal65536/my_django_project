@@ -1,6 +1,12 @@
 from django import forms
 from captcha.fields import CaptchaField
 
-class Form(forms.Form):
-    field = forms.CharField(label='Введите сообщение ', max_length=100)
+from . import models
+
+
+class InputForm(forms.ModelForm):
     captcha = CaptchaField(label='Докажи что не робот ')
+
+    class Meta:
+        model = models.Message
+        fields = '__all__'
