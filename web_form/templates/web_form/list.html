@@ -6,10 +6,10 @@
 <hr>
 {% for form in list %}
     <h2>Автор : {{form.user_name}}</h2>
-    <a href="{% url 'forms:form' form.id%}"><h4>{{form.title}}</h4> </a>
+    <a href="{% url 'forms:article_view' form.id%}"><h4>{{form.title}}</h4> </a>
 {% endfor %}
 <hr>
-<form action = "{% url 'forms:form_create' %}">
+<form action = "{% url 'forms:article_create' %}">
     <input type="submit" value="Добавить сообщение">
 </form>
 {% endblock %}

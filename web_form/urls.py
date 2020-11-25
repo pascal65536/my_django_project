@@ -5,8 +5,8 @@ from . import views
 app_name = 'forms'
 
 urlpatterns = [
-    path('', views.list_forms, name='list_forms'),
-    path('form_create/', views.form_create, name='form_create'),
-    path('<int:form_id>/', views.form, name='form'),
+    path('', views.list_articles_view, name='list_articles_view'),
+    path('article_create/', views.article_create, name='article_create'),
+    path('<int:article_id>/', views.article_view, name='article_view'),
 ]
 

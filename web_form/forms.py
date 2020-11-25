@@ -1,12 +1,12 @@
 from django import forms
 from captcha.fields import CaptchaField
 
-from . import models
+from .models import Article
 
 
-class InputForm(forms.ModelForm):
+class ArticleForm(forms.ModelForm):
     captcha = CaptchaField(label='Докажи что не робот ')
 
     class Meta:
-        model = models.Message
+        model = Article
         fields = '__all__'

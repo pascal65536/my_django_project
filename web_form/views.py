@@ -1,36 +1,32 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 
-from .forms import InputForm
-from .models import Message
-
-DIRNAME = 'web_form'
+from .forms import ArticleForm
+from .models import Article
 
 
-def list_forms(request):
-    list_obj = Message.objects.all()
-    return render(request, DIRNAME + '/list.html', {'list': list_obj})
+def list_articles_view(request):
+    articles_qs = Article.objects.all()
+    return render(request, 'web_form/list.html', {'list': articles_qs})
 
 
-def form_create(request):
-    obj = InputForm(request.POST or None)
+def article_create(request):
+    form = ArticleForm(request.POST or None)
     reset = False
 
     if request.method == "POST":
-        if obj.is_valid():
-            obj.save()
-            title = request.POST.get("user_name")
-            return HttpResponse("Сообщение " + title + " отправленно!")
-        else:
-            reset = True
-            return render(request, DIRNAME + '/create.html', {'form': obj, 'reset': reset})
-    else:
-        return render(request, DIRNAME + '/create.html', {'form': obj, 'reset': reset})
+        if form.is_valid():
+            #form.save()
+            return HttpResponse(f"Сообщение {form['user_name'].value()} отправленно!")
+        reset = True
+
+    return render(request, 'web_form/create.html', {'form': form, 'reset': reset})
 
 
-def form(request, form_id):
+def article_view(request, article_id):
     try:
-        obj = Message.objects.get(id=form_id)
-    except:
-        return HttpResponse("Статья не найденна!")
-    return render(request, DIRNAME + '/form.html', {'form': obj})
+        article = Article.objects.get(id=article_id)
+    except Article.DoesNotExist:
+        raise Http404("Статья не найденна!")
+
+    return render(request, 'web_form/form.html', {'form': article})
